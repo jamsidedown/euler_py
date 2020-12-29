@@ -1,23 +1,14 @@
 def run() -> int:
-    factors = set()
+    last_factor, current = 1, 2
     target = 600851475143
-    i = 2
-    while i * i <= target:
-        if target % i == 0:
-            factors.add(i)
-            factors.add(target / i)
-        i += 1
-
-    return max(filter(is_prime, factors))
-
-
-def is_prime(n: int) -> bool:
-    i = 2
-    while i * i <= n:
-        if n % i == 0:
-            return False
-        i += 1
-    return True
+    while target > 1:
+        if target % current == 0:
+            target //= current
+            last_factor = current
+            current = 2
+        else:
+            current += 1 if current == 2 else 2
+    return last_factor
 
 
 if __name__ == '__main__':

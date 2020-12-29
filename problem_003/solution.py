@@ -4,8 +4,7 @@ def run() -> int:
     while target > 1:
         if target % current == 0:
             target //= current
-            last_factor = current
-            current = 2
+            last_factor, current = current, 2
         else:
             current += 1 if current == 2 else 2
     return last_factor

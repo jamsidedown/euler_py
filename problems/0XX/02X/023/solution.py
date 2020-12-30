@@ -1,5 +1,3 @@
-from math import prod
-from operator import pos
 from typing import List
 
 

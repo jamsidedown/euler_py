@@ -6,7 +6,7 @@ def run() -> str:
 
 
 def parse() -> List[int]:
-    with open('problem_013/input.txt', 'r') as f:
+    with open('problems/0XX/01X/013/input.txt', 'r') as f:
         return [int(line.strip()) for line in f]
 
 

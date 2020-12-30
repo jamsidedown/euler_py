@@ -7,7 +7,7 @@ def run() -> int:
 
 
 def parse() -> str:
-    with open('problem_008/input.txt', 'r') as f:
+    with open('problems/0XX/00X/008/input.txt', 'r') as f:
         return f.read().replace('\n', '')
 
 

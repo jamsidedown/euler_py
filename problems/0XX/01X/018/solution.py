@@ -12,7 +12,7 @@ def run() -> int:
 
 
 def parse() -> List[List[int]]:
-    with open('problem_01X/problem_018/input.txt', 'r') as f:
+    with open('problems/0XX/01X/018/input.txt', 'r') as f:
         return [[int(value.lstrip('0') or '0') for value in line.split()] for line in f]
 
 

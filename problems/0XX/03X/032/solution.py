@@ -1,4 +1,4 @@
-from typing import Iterator, List
+from typing import List
 
 
 DIGITS = set('123456789')
@@ -26,40 +26,6 @@ def run() -> int:
             if (a_set | b_set) & c_set:
                 continue
             if (a_set | b_set | c_set) == DIGITS:
-                products.add(c)
-    return sum(products)
-
-
-def run_old() -> int:
-    products = set()
-    for a in range(2, 10_000):
-        a_str = str(a)
-        a_set = set(a_str)
-        a_len = len(a_str)
-        if len(a_set) != a_len:
-            continue
-        b_start = a + 1
-        for b in range(b_start, 100_000):
-            b_str = str(b)
-            b_set = set(b_str)
-            b_len = len(b_str)
-            if len(b_set) != b_len:
-                continue
-            ab_set = a_set | b_set
-            ab_len = a_len + b_len
-            if a_set & b_set:
-                continue
-            c = a * b
-            c_str = str(c)
-            c_set = set(c_str)
-            c_len = len(c_str)
-            abc_set = ab_set | c_set
-            abc_len = ab_len + c_len
-            if abc_len > 10:
-                break
-            if ab_set & c_set:
-                continue
-            if abc_set == DIGITS:
                 products.add(c)
     return sum(products)
 

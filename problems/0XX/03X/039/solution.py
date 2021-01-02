@@ -1,40 +1,26 @@
-from math import sqrt
-from typing import List, Set, Union
+from typing import Dict, Set
+
+
+SQUARES = {n * n: n for n in range(1, 1000)}
+SQUARES_SET = set(SQUARES.keys())
 
 
 def run() -> int:
-    max_p, max_solutions = 0, 0
-    for p in range(3 + 4 + 5, 1001):
-        if (p_len := solutions(p)) > max_solutions:
-            max_p, max_solutions = p, p_len
-            print(f'{max_p}: {max_solutions}')
-    return max_p
+    solutions: Dict[int, Set[str]] = {}
 
-
-def solutions(p: int) -> int:
-    valid: Set[str] = set()
-    for c in range(5, p):
-        csq = c * c
-        for b in range(1, c):
-            if b + c >= p:
-                break
-            bsq = b * b
-            asq = csq - bsq
-            a = sqrt_int(asq)
-            if a is None:
+    for cc in SQUARES:
+        intersection = SQUARES_SET & {cc - sq for sq in SQUARES_SET}
+        for bb in intersection:
+            aa = cc - bb
+            c, b, a = SQUARES[cc], SQUARES[bb], SQUARES[aa]
+            p = c + b + a
+            if p > 1000:
                 continue
-            if a + b + c == p:
-                valid.add(','.join(map(str, sorted([a, b, c]))))
-    return len(valid)
+            p_set = solutions.setdefault(p, set())
+            p_set.add(','.join(map(str, sorted([a, b, c]))))
 
-
-def sqrt_int(n: int) -> Union[int, None]:
-    rn = int(sqrt(n))
-    if rn * rn == n:
-        return rn
-    if (rn + 1) * (rn + 1) == n:
-        return rn + 1
-    return None
+    solution_lens = {key: len(value) for key, value in solutions.items()}
+    return max(solution_lens, key=solution_lens.get)
 
 
 if __name__ == '__main__':
